@@ -1,0 +1,653 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Dear Kanna❤️</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+}<!DOCTYPE html>
+
+
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #ffe4ef, #ffb6d5, #ffd6e7);
+    color: #a52a5a;
+    text-align: center;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 75px 15px 40px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.page.active {
+    display: flex;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-love {
+    background: rgba(255,255,255,0.94);
+    padding: 35px 25px;
+    border-radius: 30px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 10px 35px #d65b8b55;
+    border: 2px solid white;
+}
+
+h1 {
+    color: #e63976;
+    font-size: clamp(30px, 6vw, 45px);
+}
+
+h2 {
+    color: #d6336c;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.big-heart {
+    font-size: 85px;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.love-btn {
+    background: #e83e78;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 13px 27px;
+    font-size: 17px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.love-btn:hover {
+    background: #b91d59;
+    color: white;
+    transform: scale(1.06);
+}
+
+.secondary-btn {
+    background: white;
+    color: #d6336c;
+    border: 2px solid #e83e78;
+    border-radius: 30px;
+    padding: 12px 25px;
+    margin: 10px;
+}
+
+.nav-dots {
+    position: fixed;
+    top: 15px;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #e83e78;
+}
+
+.dot.active {
+    background: #e83e78;
+}
+
+/* Photo gallery */
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.photo-card {
+    background: #fff0f5;
+    padding: 9px;
+    border-radius: 20px;
+    border: 2px solid #ff9cbd;
+    box-shadow: 0 5px 15px #e83e7833;
+    transition: 0.4s;
+}
+
+.photo-card:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.photo-card p {
+    font-size: 15px;
+    margin: 10px 0 0;
+    color: #d6336c;
+}
+
+/* Reasons */
+
+.reason {
+    background: #fff0f5;
+    padding: 15px;
+    margin: 12px 0;
+    border-radius: 20px;
+    font-size: 18px;
+    border: 1px dashed #ff9cbd;
+}
+
+/* Floating hearts */
+
+.heart {
+    position: fixed;
+    bottom: -40px;
+    animation: floatHeart 8s linear forwards;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes floatHeart {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Butterflies */
+
+.butterfly {
+    position: fixed;
+    bottom: -50px;
+    font-size: 30px;
+    animation: fly 12s linear forwards;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes fly {
+    0% {
+        transform: translate(0, 0) rotate(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    50% {
+        transform: translate(60px, -50vh) rotate(25deg);
+    }
+    100% {
+        transform: translate(-60px, -110vh) rotate(-25deg);
+        opacity: 0;
+    }
+}
+
+.signature {
+    font-style: italic;
+    color: #e63976;
+    font-size: 20px;
+}
+
+#finalMessage {
+    display: none;
+    margin-top: 25px;
+}
+
+@media(max-width: 480px) {
+    .card-love {
+        padding: 25px 15px;
+    }
+
+    .photo-card img {
+        height: 135px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE NAVIGATION -->
+<div class="nav-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+</div>
+
+<!-- PAGE 1: WELCOME -->
+<section class="page active" id="page1">
+
+    <div class="card-love">
+
+        <div class="big-heart">❤️</div>
+
+        <h1>Welcome Vinny!</h1>
+
+        <h2>My Kanna 🦋</h2>
+
+        <p>
+            I created this little world just for you.
+            Every heart, every butterfly and every word
+            is filled with my love.
+        </p>
+
+        <p>
+            You are my favourite person,
+            my happiness and my forever love dunuuu.
+        </p>
+
+        <h2>Are You Ready babes? 💗</h2>
+
+        <button class="love-btn" onclick="nextPage(2)">
+            Start Our Love Story 💌
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PAGE 2: LOVE LETTER -->
+<section class="page" id="page2">
+
+    <div class="card-love">
+
+        <div class="big-heart">💌</div>
+
+        <h1>A Letter From My Kanna❤️</h1>
+
+        <h2>To My Dear Vinny kanna❤️</h2>
+
+        <p>
+            My dunna babes,
+            <br><br>
+
+            Sometimes words are not enough to explain
+            how much you mean to me.
+            <br><br>
+
+            You are not just my husband.
+            You are the person with whom I want
+            to share my happiness, dreams and life.
+            <br><br>
+
+            I know we may have misunderstandings,
+            difficult days and moments of silence.
+            But I still wish for us to understand
+            each other and grow together.
+            <br><br>
+
+            I miss your care, your affection,
+            your attention and your beautiful smile.
+            <br><br>
+
+            I don't need expensive gifts.
+            I just want your time, love, respect
+            and a little happiness with you.
+            <br><br>
+
+            If I could choose my life partner again,
+            I would still choose YOU.
+            <br><br>
+
+            I want to hold your hand through every
+            chapter of our life.
+        </p>
+
+        <div class="signature">
+            Forever yours, with endless love kanna ❤️
+        </div>
+
+        <button class="love-btn" onclick="nextPage(3)">
+            See Our Memories Dunnuu 📸
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PAGE 3: FOUR IMAGES -->
+<section class="page" id="page3">
+
+    <div class="card-love">
+
+        <div class="big-heart">💕</div>
+
+        <h1>Our Little Love Gallery kannaa</h1>
+
+        <h2>Every Picture Tells a Story 🦋</h2>
+
+        <p>
+            A little collection of love,
+            sweetness and beautiful memories.
+        </p>
+
+        <div class="photo-gallery">
+
+            <div class="photo-card">
+
+                <img
+                src="c:\Users\kallu\OneDrive\Pictures\images v\myphoto.jpg1.jpeg"
+                alt="Romantic picture 1">
+
+                <p>My Kanna ❤️</p>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img
+                src="c:\Users\kallu\OneDrive\Pictures\images v\myphoto.jpg2.jpeg"
+                alt="Romantic picture 2">
+
+                <p>love you dunnuu 💗</p>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img
+                src="c:\Users\kallu\OneDrive\Pictures\images v\myphoto.jpg3.jpeg"
+                alt="Romantic picture 3">
+
+                <p>sweety love vinny 🦋</p>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img
+                src="c:\Users\kallu\OneDrive\Pictures\images v\myphoto.jpg4.jpeg"
+                alt="Romantic picture 4">
+
+                <p>Vinny kanna❤️ 🥰</p>
+
+            </div>
+
+        </div>
+
+        <h2 class="mt-4">
+            You + Me = Forever kanna❤️
+        </h2>
+
+        <button class="love-btn" onclick="nextPage(4)">
+            Continue Our Story  babes🦋
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PAGE 4: REASONS -->
+<section class="page" id="page4">
+
+    <div class="card-love">
+
+        <div class="big-heart">🦋</div>
+
+        <h1>Why I Love You!</h1>
+
+        <div class="reason">
+            ❤️ Because you are special to me kanna❤️.
+        </div>
+
+        <div class="reason">
+            🥰 Because your smile makes me happy dunnu. 
+        </div>
+
+        <div class="reason">
+            💕 Because I want to share my dreams with you Kanna❤️.
+        </div>
+
+        <div class="reason">
+            🌹 Because I want to grow old with you vinny.
+        </div>
+
+        <div class="reason">
+            💍 Because I choose you every day kanna.
+        </div>
+
+        <div class="reason">
+            🦋 Because you are my forever person Kanna❤️.
+        </div>
+
+        <p>
+            My heart doesn't need a thousand reasons.
+            It simply chooses you!
+        </p>
+
+        <button class="love-btn" onclick="nextPage(5)">
+            Open My Final Surprise  babes💍
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PAGE 5: FINAL PROPOSAL -->
+<section class="page" id="page5">
+
+    <div class="card-love">
+
+        <div class="big-heart">💍</div>
+
+        <h1>One Question, My Love!</h1>
+
+        <h2>Will You Hold My Hand Forever kanna?</h2>
+
+        <p>
+            Will you promise to walk beside me,
+            understand me, respect me, love me
+            and create a beautiful future together?
+        </p>
+
+        <h2>Will You Be My Forever Love? ❤️</h2>
+
+        <button class="love-btn" onclick="sayYes()">
+            YES, FOREVER! ❤️
+        </button>
+
+        <button class="secondary-btn" onclick="sayNo()">
+            NO 🙈
+        </button>
+
+        <div id="finalMessage">
+
+            <div class="big-heart">💖</div>
+
+            <h1>Yay! I Love You!</h1>
+
+            <h2>YOU ARE MY FOREVER! 😘</h2>
+
+            <p>
+                Thank you for being a part of my life.
+                Let's make more memories, share more smiles
+                and write a beautiful love story together.
+            </p>
+
+            <h2>Forever & Always ❤️</h2>
+
+            <button class="love-btn" onclick="restart()">
+                Read Our Story Again 🔄
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- JAVASCRIPT -->
+<script>
+
+// PAGE NAVIGATION
+
+function nextPage(number) {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.getElementById("page" + number).classList.add("active");
+
+    document.querySelectorAll(".dot").forEach((dot, index) => {
+        dot.classList.toggle("active", index === number - 1);
+    });
+
+    window.scrollTo(0, 0);
+}
+
+
+// YES BUTTON
+
+function sayYes() {
+
+    document.getElementById("finalMessage").style.display = "block";
+
+    document.getElementById("finalMessage").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    for (let i = 0; i < 50; i++) {
+        createHeart();
+        createButterfly();
+    }
+
+}
+
+
+// NO BUTTON
+
+function sayNo() {
+
+    alert("Think again, my love! 🥺❤️");
+
+}
+
+
+// RESTART
+
+function restart() {
+
+    document.getElementById("finalMessage").style.display = "none";
+
+    nextPage(1);
+
+}
+
+
+// FLOATING HEARTS
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML = ["❤️", "💕", "💗", "💖", "💘"][
+        Math.floor(Math.random() * 5)
+    ];
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 25) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 10000);
+
+}
+
+
+// FLYING BUTTERFLIES
+
+function createButterfly() {
+
+    const butterfly = document.createElement("div");
+
+    butterfly.className = "butterfly";
+
+    butterfly.innerHTML = "🦋";
+
+    butterfly.style.left = Math.random() * 100 + "vw";
+
+    butterfly.style.animationDuration =
+        (7 + Math.random() * 8) + "s";
+
+    document.body.appendChild(butterfly);
+
+    setTimeout(() => butterfly.remove(), 15000);
+
+}
+
+
+// CONTINUOUS ANIMATIONS
+
+setInterval(createHeart, 800);
+
+setInterval(createButterfly, 2500);
+
+</script>
+
+</body>
+</html>
